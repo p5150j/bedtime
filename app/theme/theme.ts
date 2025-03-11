@@ -1,0 +1,133 @@
+export const theme = {
+  colors: {
+    primary: "#4A90E2",
+    secondary: "#50E3C2",
+    accent: "#F5A623",
+    background: {
+      primary: "#0F172A",
+      secondary: "#1E293B",
+      tertiary: "#334155",
+    },
+    surface: {
+      primary: "#1E293B",
+      secondary: "#334155",
+      tertiary: "#475569",
+    },
+    text: {
+      primary: "#F8FAFC",
+      secondary: "#CBD5E1",
+      tertiary: "#94A3B8",
+    },
+    error: "#EF4444",
+    success: "#10B981",
+    warning: "#F59E0B",
+    gradients: {
+      primary: {
+        start: "#FE3F68",
+        middle: "#9B4BCC",
+        end: "#4A6EEC",
+      },
+      secondary: {
+        start: "#4A6EEC",
+        middle: "#2FDDA2",
+        end: "#50E3C2",
+      },
+      accent: {
+        start: "#F5A623",
+        middle: "#FE3F68",
+        end: "#9B4BCC",
+      },
+    },
+    gray: {
+      100: "#F1F5F9",
+      200: "#E2E8F0",
+      300: "#CBD5E1",
+      400: "#94A3B8",
+      500: "#64748B",
+      600: "#475569",
+      700: "#334155",
+      800: "#1E293B",
+      900: "#0F172A",
+    },
+  },
+  typography: {
+    fontFamily: {
+      primary: "Poppins",
+      secondary: "Montserrat",
+      special: "ABeeZee",
+    },
+    fontSize: {
+      xs: "0.75rem",
+      sm: "0.875rem",
+      base: "1rem",
+      lg: "1.125rem",
+      xl: "1.25rem",
+      "2xl": "1.5rem",
+      "3xl": "1.875rem",
+      "4xl": "2.25rem",
+      "5xl": "3rem",
+    },
+    fontWeight: {
+      thin: "100",
+      extralight: "200",
+      light: "300",
+      normal: "400",
+      medium: "500",
+      semibold: "600",
+      bold: "700",
+      extrabold: "800",
+      black: "900",
+    },
+  },
+  spacing: {
+    xs: 4,
+    sm: 8,
+    md: 16,
+    lg: 24,
+    xl: 32,
+    "2xl": 48,
+    "3xl": 64,
+  },
+  borderRadius: {
+    sm: 4,
+    md: 8,
+    lg: 16,
+    full: 9999,
+  },
+  shadows: {
+    sm: "0 2px 4px rgba(0,0,0,0.3)",
+    md: "0 4px 8px rgba(0,0,0,0.4)",
+    lg: "0 8px 16px rgba(0,0,0,0.5)",
+    xl: "0 12px 24px rgba(0,0,0,0.6)",
+    glow: {
+      primary: "0 0 20px rgba(74, 144, 226, 0.3)",
+      secondary: "0 0 20px rgba(80, 227, 194, 0.3)",
+      accent: "0 0 20px rgba(245, 166, 35, 0.3)",
+    },
+  },
+  transitions: {
+    default: "0.3s ease-in-out",
+    fast: "0.15s ease-in-out",
+    slow: "0.5s ease-in-out",
+  },
+  breakpoints: {
+    xs: 320,
+    sm: 640,
+    md: 768,
+    lg: 1024,
+    xl: 1280,
+    "2xl": 1536,
+  },
+  zIndex: {
+    behind: -1,
+    normal: 0,
+    above: 1,
+    modal: 1000,
+    tooltip: 1100,
+    toast: 1200,
+    highest: 9999,
+  },
+} as const;
+
+export type Theme = typeof theme;
+export default theme; 

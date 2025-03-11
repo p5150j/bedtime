@@ -1,109 +1,133 @@
-import { StyleSheet, Image, Platform } from 'react-native';
+import React from 'react';
+import { View, Text, ScrollView, StyleSheet, Image } from 'react-native';
+import { MotiView } from 'moti';
+import theme from '../theme/theme';
+import {
+  Card,
+  StoryContent,
+  StoryAudioSection,
+  Grid,
+  StoryThumbnail,
+  StoryCard,
+  StoryMeta,
+} from '../components/StyledComponents';
+import AudioPlayer from '../components/AudioPlayer';
 
-import { Collapsible } from '@/components/Collapsible';
-import { ExternalLink } from '@/components/ExternalLink';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-import { IconSymbol } from '@/components/ui/IconSymbol';
+const ExploreScreen = () => {
+  const stories = [
+    {
+      id: '1',
+      title: 'The Magic Forest',
+      description: 'A wonderful adventure awaits in the enchanted forest...',
+      duration: '5 min',
+      ageRange: '5-8',
+      image: 'https://cdn.midjourney.com/55ace2e0-d376-4634-a888-2834ffb7a250/0_0.jpeg',
+      audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+    },
+    {
+      id: '2',
+      title: 'Space Adventures',
+      description: 'Join Captain Star on an intergalactic journey...',
+      duration: '8 min',
+      ageRange: '7-10',
+      image: 'https://cdn.midjourney.com/e05f5fd9-dbad-49eb-9586-803a5b4ecc04/0_1.jpeg',
+      audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
+    },
+  ];
 
-export default function TabTwoScreen() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
-      headerImage={
-        <IconSymbol
-          size={310}
-          color="#808080"
-          name="chevron.left.forwardslash.chevron.right"
-          style={styles.headerImage}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Explore</ThemedText>
-      </ThemedView>
-      <ThemedText>This app includes example code to help you get started.</ThemedText>
-      <Collapsible title="File-based routing">
-        <ThemedText>
-          This app has two screens:{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/explore.tsx</ThemedText>
-        </ThemedText>
-        <ThemedText>
-          The layout file in <ThemedText type="defaultSemiBold">app/(tabs)/_layout.tsx</ThemedText>{' '}
-          sets up the tab navigator.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/router/introduction">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Android, iOS, and web support">
-        <ThemedText>
-          You can open this project on Android, iOS, and the web. To open the web version, press{' '}
-          <ThemedText type="defaultSemiBold">w</ThemedText> in the terminal running this project.
-        </ThemedText>
-      </Collapsible>
-      <Collapsible title="Images">
-        <ThemedText>
-          For static images, you can use the <ThemedText type="defaultSemiBold">@2x</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">@3x</ThemedText> suffixes to provide files for
-          different screen densities
-        </ThemedText>
-        <Image source={require('@/assets/images/react-logo.png')} style={{ alignSelf: 'center' }} />
-        <ExternalLink href="https://reactnative.dev/docs/images">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Custom fonts">
-        <ThemedText>
-          Open <ThemedText type="defaultSemiBold">app/_layout.tsx</ThemedText> to see how to load{' '}
-          <ThemedText style={{ fontFamily: 'SpaceMono' }}>
-            custom fonts such as this one.
-          </ThemedText>
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/versions/latest/sdk/font">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Light and dark mode components">
-        <ThemedText>
-          This template has light and dark mode support. The{' '}
-          <ThemedText type="defaultSemiBold">useColorScheme()</ThemedText> hook lets you inspect
-          what the user's current color scheme is, and so you can adjust UI colors accordingly.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Animations">
-        <ThemedText>
-          This template includes an example of an animated component. The{' '}
-          <ThemedText type="defaultSemiBold">components/HelloWave.tsx</ThemedText> component uses
-          the powerful <ThemedText type="defaultSemiBold">react-native-reanimated</ThemedText>{' '}
-          library to create a waving hand animation.
-        </ThemedText>
-        {Platform.select({
-          ios: (
-            <ThemedText>
-              The <ThemedText type="defaultSemiBold">components/ParallaxScrollView.tsx</ThemedText>{' '}
-              component provides a parallax effect for the header image.
-            </ThemedText>
-          ),
-        })}
-      </Collapsible>
-    </ParallaxScrollView>
+    <ScrollView style={styles.container}>
+      <MotiView
+        from={{ opacity: 0, translateY: 20 }}
+        animate={{ opacity: 1, translateY: 0 }}
+        transition={{ type: 'timing', duration: 600 }}
+      >
+        <Text style={styles.title}>Discover Stories</Text>
+        <Grid>
+          {stories.map((story) => (
+            <StoryCard key={story.id}>
+              <View style={styles.thumbnailContainer}>
+                <Image
+                  source={{ uri: story.image }}
+                  style={styles.thumbnail}
+                  resizeMode="cover"
+                />
+                <View style={styles.thumbnailOverlay} />
+              </View>
+              <StoryContent>
+                <Text style={styles.storyTitle}>{story.title}</Text>
+                <Text style={styles.storyDescription}>{story.description}</Text>
+                <StoryMeta>
+                  <Text style={styles.metaText}>{story.duration}</Text>
+                  <Text style={styles.metaDot}>•</Text>
+                  <Text style={styles.metaText}>Age {story.ageRange}</Text>
+                </StoryMeta>
+              </StoryContent>
+              <StoryAudioSection>
+                <AudioPlayer
+                  audioUrl={story.audioUrl}
+                  onPlaybackStatusUpdate={(status) => {
+                    console.log('Playback status:', status);
+                  }}
+                />
+              </StoryAudioSection>
+            </StoryCard>
+          ))}
+        </Grid>
+      </MotiView>
+    </ScrollView>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  headerImage: {
-    color: '#808080',
-    bottom: -90,
-    left: -35,
-    position: 'absolute',
+  container: {
+    flex: 1,
+    backgroundColor: theme.colors.background.primary,
+    padding: theme.spacing.lg,
   },
-  titleContainer: {
-    flexDirection: 'row',
-    gap: 8,
+  title: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    color: theme.colors.text.primary,
+    marginBottom: theme.spacing.xl,
+  },
+  thumbnailContainer: {
+    height: 200,
+    width: '100%',
+    position: 'relative',
+  },
+  thumbnail: {
+    width: '100%',
+    height: '100%',
+    borderTopLeftRadius: theme.borderRadius.lg,
+    borderTopRightRadius: theme.borderRadius.lg,
+  },
+  thumbnailOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+    borderTopLeftRadius: theme.borderRadius.lg,
+    borderTopRightRadius: theme.borderRadius.lg,
+  },
+  storyTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: theme.colors.text.primary,
+    marginBottom: theme.spacing.sm,
+  },
+  storyDescription: {
+    fontSize: 16,
+    color: theme.colors.text.secondary,
+    marginBottom: theme.spacing.md,
+  },
+  metaText: {
+    fontSize: 14,
+    color: theme.colors.text.tertiary,
+  },
+  metaDot: {
+    fontSize: 14,
+    color: theme.colors.text.tertiary,
+    marginHorizontal: theme.spacing.xs,
   },
 });
+
+export default ExploreScreen;
